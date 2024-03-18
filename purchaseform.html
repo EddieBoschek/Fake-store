@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Purchase Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="icon" type="image/x-icon" href="images/galge.png" /> -->
+    <link rel="stylesheet" href="home.css" />
+    <script src="scripts/main.js"></script>
+  </head>
+  <body>
+
+    <h3>This is a header</h3>
+    <h1>Confirm Purchase</h1>
+    <h2>Selected Product</h2>
+    <h3>Product Card</h3>
+    <h2>Complete Order</h2>
+
+    <div class="checkout">
+        <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        placeholder="First Name"
+      />
+      <br />
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        placeholder="Last Name"
+      />
+      <br />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="E-mail"
+      />
+      <br />
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Phone Number"
+      />
+      <br />
+      <input
+        type="text"
+        id="address"
+        name="address"
+        placeholder="Street Address"
+      />
+      <br />
+      <input
+        type="text"
+        id="zip"
+        name="zip"
+        placeholder="ZIP-Code"
+      />
+      <br />
+      <input
+        type="text"
+        id="city"
+        name="city"
+        placeholder="City"
+      />
+    </div>
+    <br>
+    <button type="button" id="makePurchase" onclick="validateOrderInput()">Buy Product</button>
+    </div>
+</body>
+</html>
