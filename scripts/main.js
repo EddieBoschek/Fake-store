@@ -33,7 +33,7 @@ class UI {
         <div class="col-md-4 col-lg-3 col-xl-3 p-3 best">
           <div class="card h-100 mb-4">
             <img class="card-img-top" src=${item.image}>
-            <div class="car-body border-top">
+            <div class="card-body border-top">
               <h5 class="card-title align-self-end">
                 ${item.title}
               </h5>
