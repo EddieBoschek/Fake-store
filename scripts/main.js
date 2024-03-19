@@ -24,35 +24,48 @@ class Products {
 }
 
 class UI {
-  showProducts(products) {
-    let page = '';
-    let result = '';
-    products.forEach((item) => {
-      console.log(item.image);
-      result += `
-        <div class="col-md-4 col-lg-3 col-xl-3 p-3 best">
-          <div class="card h-100 mb-4">
-            <img class="card-img-top" src=${item.image}>
-            <div class="card-body border-top">
-              <h5 class="card-title align-self-end">
-                ${item.title}
-              </h5>
-              <p class="card-text align-self-end">
-                ${item.price}
-              </p>
-            </div>
-          </div>
-        </div>
-      `;
+  displayProducts(products) {
+    const items = products.map((item) => {
+      const col = document.createElement('div');
+      col.className = 'col-md-4 col-lg-3 col-xl-3 p-3 best';
+
+      const card = document.createElement('div');
+      card.className = 'card h-100 mb-4';
+
+      const img = document.createElement('img');
+      img.className = 'card-img-top';
+      img.src = item.image;
+
+      const cardBody = document.createElement('div');
+      cardBody.className = 'card-body border-top';
+
+      const title = document.createElement('h5');
+      title.className = 'card-title align-self-end';
+      title.innerHTML = item.title;
+
+      const price = document.createElement('p');
+      price.className = 'card-text align-self-end';
+      price.innerHTML = '$' + item.price;
+
+      cardBody.appendChild(title);
+      cardBody.appendChild(price);
+      card.appendChild(img);
+      card.appendChild(cardBody);
+      col.appendChild(card);
+      return col;
     });
-    page = `
-    <div class="container-xl p-5 my-5">
-      <div class="row row-cols-1 row-cols-md-3 g-2">
-        ${result}
-      </div>
-    </div>
-    `;
-    productsDOM.innerHTML = page;
+
+    const container = document.createElement('div');
+    container.className = 'container-xl p-5 my-5';
+
+    const row = document.createElement('div');
+    row.className = 'row row-cols-1 row-cols-md-3 g-2';
+
+    items.forEach((item) => {
+      row.appendChild(item);
+    });
+    container.appendChild(row);
+    document.querySelector('.products-layout').appendChild(container);
   }
 }
 
@@ -60,5 +73,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const ui = new UI();
   const products = new Products();
 
-  products.getProducts().then((products) => ui.showProducts(products));
+  products.getProducts().then((products) => ui.displayProducts(products));
 });
