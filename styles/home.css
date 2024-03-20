@@ -70,3 +70,7 @@
 .active {
   font-weight: 700;
 }
+
+.card.card-no-pointer {
+  pointer-events: none;
+}
