@@ -67,13 +67,6 @@
   text-decoration: none;
 }
 
-.cart-icon {
-    max-height: 40px;
-    margin-top: auto;
-}
-
-.search {
-    border-radius: 10px;
-    max-height: 30px;
-    margin-top: auto;
+.active {
+  font-weight: 700;
 }
