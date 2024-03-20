@@ -24,3 +24,49 @@
 .container-custom {
   max-width: 800px;
 }
+
+.custom-navbar-main {
+  padding: 0px;
+  height: 120px;
+}
+
+.navbar-brand {
+  font-size: 47px;
+  font-weight: 600;
+  color: #000;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  position: absolute;
+}
+
+.nav-item {
+  padding: 0 10px;
+  font-weight: lighter;
+  color: #606060;
+}
+
+.custom-navbar-secondary {
+  background-color: #000;
+  color: #fff;
+}
+
+.nav-item {
+  color: #aaaaaa;
+  font-weight: 500;
+}
+
+.nav-link {
+  color: #727272;
+  font-weight: 400;
+}
+
+.nav-link-secondary {
+  color: #fff;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.active {
+  font-weight: 700;
+}
