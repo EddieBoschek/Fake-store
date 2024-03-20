@@ -24,3 +24,19 @@
 .container-custom {
   max-width: 800px;
 }
+
+.ps-custom-navbar {
+  padding-left: 10%;
+  align-items: center;
+  background-color: rgb(206, 206, 206);
+}
+
+.navbar-brand {
+  font-size: 34px;
+  padding: 0 1em;
+}
+
+.navbar-brand img {
+  height: 80px;
+  padding: 0;
+}
