@@ -84,3 +84,15 @@
 .card.card-no-pointer {
   pointer-events: none;
 }
+
+@media only screen and (max-device-width: 747px) {
+  .custom-confirmation-card {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  #navbar-secondary {
+    display: none;
+  }
+}
