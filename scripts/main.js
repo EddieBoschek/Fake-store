@@ -6,11 +6,27 @@ class Products {
     try {
       let response;
       switch (category) {
+        case "women":
+          response = await fetch(
+            "https://fakestoreapi.com/products/category/women's%20clothing"
+          );
+          break;
         case "men":
           response = await fetch(
             "https://fakestoreapi.com/products/category/men's%20clothing"
           );
           break;
+        case "jewelery":
+          response = await fetch(
+            "https://fakestoreapi.com/products/category/jewelery"
+          );
+          break;
+        case "electronics":
+          response = await fetch(
+            "https://fakestoreapi.com/products/category/electronics"
+          );
+          break;
+
         default:
           response = await fetch("https://fakestoreapi.com/products");
           break;
@@ -36,6 +52,7 @@ class Products {
 
 class UI {
   displayProducts(products) {
+    this.clear();
     const items = products.map((item) => {
       const col = document.createElement("div");
       col.className = "col-md-4 col-lg-3 col-xl-3 p-3 best";
@@ -78,24 +95,59 @@ class UI {
     container.appendChild(row);
     document.querySelector(".products-layout").appendChild(container);
   }
-}
 
+  clear() {
+    const container = document.querySelector(".products-layout");
+    if (container) {
+      container.innerHTML = "";
+    }
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
   let category = "product";
 
-  products.getProducts(category)
+  products
+    .getProducts(category)
     .then((products) => ui.displayProducts(products));
 
-    document.getElementById("m-clothing").addEventListener("click", function(event) {
+  document
+    .getElementById("m-clothing")
+    .addEventListener("click", function (event) {
       category = "men";
-      products.getProducts(category)
-      .then((products) => {
+      products.getProducts(category).then((products) => {
         ui.displayProducts(products);
-        console.log("Hej hej");});
-  });
+      });
+    });
+
+    document
+    .getElementById("w-clothing")
+    .addEventListener("click", function (event) {
+      category = "women";
+      products.getProducts(category).then((products) => {
+        ui.displayProducts(products);
+      });
+    });
+
+    document
+    .getElementById("jewelery")
+    .addEventListener("click", function (event) {
+      category = "jewelery";
+      products.getProducts(category).then((products) => {
+        ui.displayProducts(products);
+      });
+    });
+
+    document
+    .getElementById("electronics")
+    .addEventListener("click", function (event) {
+      category = "electronics";
+      products.getProducts(category).then((products) => {
+        ui.displayProducts(products);
+      });
+    });
 });
 
 document.getElementById("form").addEventListener("submit", function (event) {
