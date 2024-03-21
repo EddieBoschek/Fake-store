@@ -145,11 +145,11 @@ function validPhoneNumber(input) {
 }
 
 function resetErrors() {
-  document.getElementById("fnameError").innerText = "";
-  document.getElementById("lnameError").innerText = "";
-  document.getElementById("emailError").innerText = "";
-  document.getElementById("phoneError").innerText = "";
-  document.getElementById("addressError").innerText = "";
-  document.getElementById("zipError").innerText = "";
-  document.getElementById("cityError").innerText = "";
+  document.getElementById("fnameError").innerHTML = "&nbsp;";
+  document.getElementById("lnameError").innerHTML = "&nbsp;";
+  document.getElementById("emailError").innerHTML = "&nbsp;";
+  document.getElementById("phoneError").innerHTML = "&nbsp;";
+  document.getElementById("addressError").innerHTML = "&nbsp;";
+  document.getElementById("zipError").innerHTML = "&nbsp;";
+  document.getElementById("cityError").innerHTML = "&nbsp;";
 }

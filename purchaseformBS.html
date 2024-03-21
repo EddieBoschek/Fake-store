@@ -62,50 +62,59 @@
         <div>
             <h2 class="display-6 text-center fw-light">Complete Order</h2>
         </div>
-        <div class="row justify-content-center my-2">
-            <div>
-                <form class="container-fluid mx-auto my-3 p-2">
+        <div class="row my-2">
+            <div class="col-lg-6">
+                <form class="container-fluid d-flex flex-column mx-auto my-3 p-2">
                     <div class="row justify-content-center">
-                        <div class="col-lg-3">
+                        <div>
                             <input type="text" class="form-control" id="fname" placeholder="First Name">
-                            <div id="fnameError" class="text-danger"></div>
+                            <div id="fnameError" class="text-danger">&nbsp;</div>
                         </div>
-                        <div class="col-lg-3">
+                        <div>
                             <input type="text" class="form-control" id="lname" placeholder="Last Name">
-                            <div id="lnameError" class="text-danger"></div>
+                            <div id="lnameError" class="text-danger">&nbsp;</div>
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-lg-3">
+                        <div>
                             <input type="email" class="form-control" id="email" placeholder="E-mail">
-                            <div id="emailError" class="text-danger"></div>
+                            <div id="emailError" class="text-danger">&nbsp;</div>
                         </div>
-                        <div class="col-lg-3">
+                        <div>
                             <input type="tel" class="form-control" id="phone" placeholder="Phone Number">
-                            <div id="phoneError" class="text-danger"></div>
+                            <div id="phoneError" class="text-danger">&nbsp;</div>
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-lg-6">
+                        <div>
                             <input type="text" class="form-control" id="address" placeholder="Address">
-                            <div id="addressError" class="text-danger"></div>
+                            <div id="addressError" class="text-danger">&nbsp;</div>
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-lg-2">
+                        <div>
                             <input type="text" class="form-control" id="zip" placeholder="ZIP-Code">
-                            <div id="zipError" class="text-danger"></div>
+                            <div id="zipError" class="text-danger">&nbsp;</div>
                         </div>
-                        <div class="col-lg-4">
+                        <div>
                             <input type="text" class="form-control" id="city" placeholder="City">
-                            <div id="cityError" class="text-danger"></div>
+                            <div id="cityError" class="text-danger">&nbsp;</div>
                         </div>
                     </div>
             </div>
-            <div class="justify-content-center d-flex">
-                <button type="submit" class="btn btn-lg btn-primary">Make Purchase</button>
-            </div>
-        </form>
+                    <div class="col-lg-6 ps-lg-5 pe-lg-5 d-flex flex-column">
+                      <h3 class="fw-normal text-center mb-4 mt-3">Selected product:</h3>
+                          <div class="card text-center card-no-pointer">
+                          <div class="card-body">
+                              <h5 class="card-title">Product</h5>
+                              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo totam eum iste exercitationem facere minus at quam, sequi aliquid voluptatem!.</p>
+                          </div>
+                    </div>
+                </div>
+                    <div class="justify-content-center d-flex mt-2">
+                        <button type="submit" class="btn btn-lg btn-primary">Make Purchase</button>
+                    </div>
+            </form>
         </div>
     </section>
 
