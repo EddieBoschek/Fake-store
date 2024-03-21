@@ -84,3 +84,7 @@
 .card.card-no-pointer {
   pointer-events: none;
 }
+
+.custom-text-size {
+  font-size: 1.1rem;
+}
