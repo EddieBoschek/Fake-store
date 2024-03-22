@@ -85,6 +85,14 @@
   pointer-events: none;
 }
 
+.custom-text-size {
+  font-size: 1.1rem;
+}
+
+.text-with-shadow {
+  text-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
 @media only screen and (max-device-width: 747px) {
   .custom-confirmation-card {
     width: 100%;
