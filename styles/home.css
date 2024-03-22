@@ -104,3 +104,8 @@
     display: none;
   }
 }
+
+.black-border {
+  background: #000;
+  height: 10px;
+}
