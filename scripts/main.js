@@ -1,12 +1,12 @@
-const productsDOM = document.querySelector('.products-layout');
+const productsDOM = document.querySelector(".products-layout");
 
 class Products {
   async getProducts() {
     try {
-      const response = await fetch('https://fakestoreapi.com/products');
+      const response = await fetch("https://fakestoreapi.com/products");
 
       if (!response.ok) {
-        throw new Error('Could not fetch resource');
+        throw new Error("Could not fetch resource");
       }
 
       const data = await response.json();
@@ -26,26 +26,29 @@ class Products {
 class UI {
   displayProducts(products) {
     const items = products.map((item) => {
-      const col = document.createElement('div');
-      col.className = 'col-md-4 col-lg-3 col-xl-3 p-3 best';
+      const col = document.createElement("div");
+      col.className = "col-md-4 col-lg-3 col-xl-3 p-3 best";
 
-      const card = document.createElement('div');
-      card.className = 'card h-100 mb-4';
+      const card = document.createElement("div");
+      card.className = "card h-100 mb-4";
+      card.setAttribute("data-bs-toggle", "modal");
+      card.setAttribute("data-bs-target", "#exampleModal");
+      card.onclick = () => addContentToModal(item);
 
-      const img = document.createElement('img');
-      img.className = 'card-img-top';
+      const img = document.createElement("img");
+      img.className = "card-img-top";
       img.src = item.image;
 
-      const cardBody = document.createElement('div');
-      cardBody.className = 'card-body border-top';
+      const cardBody = document.createElement("div");
+      cardBody.className = "card-body border-top";
 
-      const title = document.createElement('h5');
-      title.className = 'card-title align-self-end';
+      const title = document.createElement("h5");
+      title.className = "card-title align-self-end";
       title.innerHTML = item.title;
 
-      const price = document.createElement('p');
-      price.className = 'card-text align-self-end';
-      price.innerHTML = '$' + item.price;
+      const price = document.createElement("p");
+      price.className = "card-text align-self-end";
+      price.innerHTML = "$" + item.price;
 
       cardBody.appendChild(title);
       cardBody.appendChild(price);
@@ -55,30 +58,39 @@ class UI {
       return col;
     });
 
-    const container = document.createElement('div');
-    container.className = 'container-xl p-5 my-5';
+    const container = document.createElement("div");
+    container.className = "container-xl p-5 my-5";
 
-    const row = document.createElement('div');
-    row.className = 'row row-cols-1 row-cols-md-3 g-2';
+    const row = document.createElement("div");
+    row.className = "row row-cols-1 row-cols-md-3 g-2";
 
     items.forEach((item) => {
       row.appendChild(item);
     });
     container.appendChild(row);
-    document.querySelector('.products-layout').appendChild(container);
+    document.querySelector(".products-layout").appendChild(container);
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+const addContentToModal = (item) => {
+  const modal = document.getElementById("exampleModal");
+  if (modal) {
+    document.querySelector(".modal-title").innerHTML = item.title;
+    document.querySelector(".rounded").src = item.image;
+    document.querySelector(".description").innerHTML = item.description;
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
 
   products.getProducts().then((products) => ui.displayProducts(products));
 });
 
-document.getElementById("form").addEventListener("submit", function(event) {
+document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
-  
+
   let firstName = document.getElementById("fname").value;
   let lastName = document.getElementById("lname").value;
   let email = document.getElementById("email").value;
@@ -91,41 +103,48 @@ document.getElementById("form").addEventListener("submit", function(event) {
 
   let isValid = true;
   if (!validInputSize(firstName)) {
-      document.getElementById("fnameError").innerText = "Input must be between 2 and 50 characters long.";
-      isValid = false;
+    document.getElementById("fnameError").innerText =
+      "Input must be between 2 and 50 characters long.";
+    isValid = false;
   }
   if (!validInputSize(lastName)) {
-      document.getElementById("lnameError").innerText = "Input must be between 2 and 50 characters long.";
-      isValid = false;
+    document.getElementById("lnameError").innerText =
+      "Input must be between 2 and 50 characters long.";
+    isValid = false;
   }
   if (!validEmail(email)) {
-      document.getElementById("emailError").innerText = "Please enter a valid email.";
-      isValid = false;
+    document.getElementById("emailError").innerText =
+      "Please enter a valid email.";
+    isValid = false;
   }
   if (!validPhoneNumber(phone)) {
-    document.getElementById("phoneError").innerText = "Please enter a valid phone number.";
+    document.getElementById("phoneError").innerText =
+      "Please enter a valid phone number.";
     isValid = false;
   }
   if (!validInputSize(address)) {
-    document.getElementById("addressError").innerText = "Input must be between 2 and 50 characters long.";
+    document.getElementById("addressError").innerText =
+      "Input must be between 2 and 50 characters long.";
     isValid = false;
   }
   if (!validZip(zip)) {
-    document.getElementById("zipError").innerText = "Please enter a valid ZIP code.";
+    document.getElementById("zipError").innerText =
+      "Please enter a valid ZIP code.";
     isValid = false;
   }
   if (!validInputSize(city)) {
-    document.getElementById("cityError").innerText = "Input must be between 2 and 50 characters long.";
+    document.getElementById("cityError").innerText =
+      "Input must be between 2 and 50 characters long.";
     isValid = false;
   }
   if (isValid) {
-    localStorage.setItem('first-name', firstName)
-    localStorage.setItem('last-name', lastName)
-    localStorage.setItem('email', email)
-    localStorage.setItem('phone', phone)
-    localStorage.setItem('address', address)
-    localStorage.setItem('zip', zip)
-    localStorage.setItem('city', city)
+    localStorage.setItem("first-name", firstName);
+    localStorage.setItem("last-name", lastName);
+    localStorage.setItem("email", email);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("address", address);
+    localStorage.setItem("zip", zip);
+    localStorage.setItem("city", city);
 
     window.location.href = "confirmation.html";
   }
