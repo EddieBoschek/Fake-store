@@ -63,10 +63,20 @@
   font-weight: 400;
 }
 
+.nav-link:hover {
+  color: #000000;
+  text-shadow: 0 0 1px #000;
+}
+
 .nav-link-secondary {
   color: #fff;
   font-weight: 400;
   text-decoration: none;
+}
+
+.nav-link-secondary:hover {
+  color: #aaa;
+  text-decoration: solid;
 }
 
 .active {
@@ -77,6 +87,7 @@
   pointer-events: none;
 }
 
+<<<<<<< HEAD
 .modal.fade {
   opacity: 0;
   transform: scale(0);
@@ -98,3 +109,29 @@
 .modal-body-middle {
   display: flex;
 }
+=======
+.custom-text-size {
+  font-size: 1.1rem;
+}
+
+.text-with-shadow {
+  text-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+@media only screen and (max-device-width: 747px) {
+  .custom-confirmation-card {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  #navbar-secondary {
+    display: none;
+  }
+}
+
+.black-border {
+  background: #000;
+  height: 10px;
+}
+>>>>>>> 63a0ef5afcbfd441b987e0964365be3c16aac382

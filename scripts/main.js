@@ -1,9 +1,36 @@
 const productsDOM = document.querySelector(".products-layout");
+let category = "product";
 
 class Products {
-  async getProducts() {
+  async getProducts(category) {
     try {
-      const response = await fetch("https://fakestoreapi.com/products");
+      let response;
+      switch (category) {
+        case "women":
+          response = await fetch(
+            "https://fakestoreapi.com/products/category/women's%20clothing"
+          );
+          break;
+        case "men":
+          response = await fetch(
+            "https://fakestoreapi.com/products/category/men's%20clothing"
+          );
+          break;
+        case "jewelery":
+          response = await fetch(
+            "https://fakestoreapi.com/products/category/jewelery"
+          );
+          break;
+        case "electronics":
+          response = await fetch(
+            "https://fakestoreapi.com/products/category/electronics"
+          );
+          break;
+
+        default:
+          response = await fetch("https://fakestoreapi.com/products");
+          break;
+      }
 
       if (!response.ok) {
         throw new Error("Could not fetch resource");
@@ -25,15 +52,13 @@ class Products {
 
 class UI {
   displayProducts(products) {
+    this.clear();
     const items = products.map((item) => {
       const col = document.createElement("div");
       col.className = "col-md-4 col-lg-3 col-xl-3 p-3 best";
 
       const card = document.createElement("div");
       card.className = "card h-100 mb-4";
-      card.setAttribute("data-bs-toggle", "modal");
-      card.setAttribute("data-bs-target", "#exampleModal");
-      card.onclick = () => addContentToModal(item);
 
       const img = document.createElement("img");
       img.className = "card-img-top";
@@ -70,22 +95,59 @@ class UI {
     container.appendChild(row);
     document.querySelector(".products-layout").appendChild(container);
   }
-}
 
-const addContentToModal = (item) => {
-  const modal = document.getElementById("exampleModal");
-  if (modal) {
-    document.querySelector(".modal-title").innerHTML = item.title;
-    document.querySelector(".rounded").src = item.image;
-    document.querySelector(".description").innerHTML = item.description;
+  clear() {
+    const container = document.querySelector(".products-layout");
+    if (container) {
+      container.innerHTML = "";
+    }
   }
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
+  let category = "product";
 
-  products.getProducts().then((products) => ui.displayProducts(products));
+  products
+    .getProducts(category)
+    .then((products) => ui.displayProducts(products));
+
+  document
+    .getElementById("m-clothing")
+    .addEventListener("click", function (event) {
+      category = "men";
+      products.getProducts(category).then((products) => {
+        ui.displayProducts(products);
+      });
+    });
+
+  document
+    .getElementById("w-clothing")
+    .addEventListener("click", function (event) {
+      category = "women";
+      products.getProducts(category).then((products) => {
+        ui.displayProducts(products);
+      });
+    });
+
+  document
+    .getElementById("jewelery")
+    .addEventListener("click", function (event) {
+      category = "jewelery";
+      products.getProducts(category).then((products) => {
+        ui.displayProducts(products);
+      });
+    });
+
+  document
+    .getElementById("electronics")
+    .addEventListener("click", function (event) {
+      category = "electronics";
+      products.getProducts(category).then((products) => {
+        ui.displayProducts(products);
+      });
+    });
 });
 
 document.getElementById("form").addEventListener("submit", function (event) {
@@ -164,11 +226,11 @@ function validPhoneNumber(input) {
 }
 
 function resetErrors() {
-  document.getElementById("fnameError").innerText = "";
-  document.getElementById("lnameError").innerText = "";
-  document.getElementById("emailError").innerText = "";
-  document.getElementById("phoneError").innerText = "";
-  document.getElementById("addressError").innerText = "";
-  document.getElementById("zipError").innerText = "";
-  document.getElementById("cityError").innerText = "";
+  document.getElementById("fnameError").innerHTML = "&nbsp;";
+  document.getElementById("lnameError").innerHTML = "&nbsp;";
+  document.getElementById("emailError").innerHTML = "&nbsp;";
+  document.getElementById("phoneError").innerHTML = "&nbsp;";
+  document.getElementById("addressError").innerHTML = "&nbsp;";
+  document.getElementById("zipError").innerHTML = "&nbsp;";
+  document.getElementById("cityError").innerHTML = "&nbsp;";
 }
