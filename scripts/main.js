@@ -60,7 +60,7 @@ class UI {
       const card = document.createElement("div");
       card.className = "card h-100 mb-4";
       card.setAttribute("data-bs-toggle", "modal");
-      card.setAttribute("data-bs-target", "#exampleModal");
+      card.setAttribute("data-bs-target", "#productModal");
       card.onclick = () => addContentToModal(item);
 
       const img = document.createElement("img");
@@ -108,7 +108,7 @@ class UI {
 }
 
 const addContentToModal = (item) => {
-  const modal = document.getElementById("exampleModal");
+  const modal = document.getElementById("productModal");
   if (modal) {
     document.querySelector(".modal-title").innerHTML = item.title;
     document.querySelector(".rounded").src = item.image;
