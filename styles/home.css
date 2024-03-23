@@ -54,6 +54,8 @@
 .nav-item {
   color: #aaaaaa;
   font-weight: 500;
+  padding: 0 10px;
+  margin: 0 10px;
 }
 
 .nav-link {
