@@ -87,13 +87,7 @@ class UI {
       card.appendChild(cardBody);
       col.appendChild(card);
 
-      // Event listener for saving product ID to localStorage and redirecting
-      card.addEventListener('click', function() {
-        const productId = this.getAttribute('data-id');
-        localStorage.setItem('selectedProductId', productId);
-        console.log('Product ID saved to localStorage and redirecting:', productId);
-        window.location.href = "purchaseformBS.html"; // Redirect to the purchase form page
-      });
+      
 
       return col;
     });
@@ -227,6 +221,16 @@ document.addEventListener("DOMContentLoaded", () => {
       products.getProducts(category).then((products) => {
         ui.displayProducts(products);
       });
+    });
+
+    document
+    .getElementById("purchase-button")
+    .addEventListener("click", function (event) {
+      // Event listener for saving product ID to localStorage and redirecting
+         const productId = this.getAttribute('data-id');
+         localStorage.setItem('selectedProductId', productId);
+         console.log('Product ID saved to localStorage and redirecting:', productId);
+         window.location.href = "purchaseformBS.html"; // Redirect to the purchase form page
     });
 });
 
