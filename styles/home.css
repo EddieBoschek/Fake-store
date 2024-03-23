@@ -129,11 +129,6 @@
     font-weight: 400;
     text-decoration: none;
   }
-  
-  .nav-link-secondary:hover {
-    color: #000;
-    text-decoration: solid;
-  }
 }
 
 .black-border {
