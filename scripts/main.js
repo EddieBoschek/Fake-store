@@ -59,6 +59,7 @@ class UI {
 
       const card = document.createElement("div");
       card.className = "card h-100 mb-4";
+      card.setAttribute('data-id', item.id); // Set the product ID as a data attribute
 
       const img = document.createElement("img");
       img.className = "card-img-top";
@@ -80,6 +81,15 @@ class UI {
       card.appendChild(img);
       card.appendChild(cardBody);
       col.appendChild(card);
+
+      // Event listener for saving product ID to localStorage and redirecting
+      card.addEventListener('click', function() {
+        const productId = this.getAttribute('data-id');
+        localStorage.setItem('selectedProductId', productId);
+        console.log('Product ID saved to localStorage and redirecting:', productId);
+        window.location.href = "purchaseformBS.html"; // Redirect to the purchase form page
+      });
+
       return col;
     });
 
