@@ -232,12 +232,24 @@
     margin-top: -10px;
   }
 
-  .customer-info {
-    margin-left: 50px;
-  }
-
   #confirmationPage {
     box-shadow: none !important;
+  }
+
+  .side-by-side-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .customer-info-titles,
+  .customer-info-values {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .customer-info-titles p,
+  .customer-info-values p {
+    margin-bottom: 1rem;
   }
 }
 
@@ -253,19 +265,8 @@
     font-weight: 400;
     text-decoration: none;
   }
-  .side-by-side-layout {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .customer-info-titles,
-  .customer-info-values {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .customer-info-titles p,
-  .customer-info-values p {
-    margin-bottom: 1rem;
+  .customer-titles {
+    padding-left: 10%;
   }
 }
