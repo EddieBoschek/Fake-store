@@ -16,38 +16,48 @@
 
     <nav class="navbar navbar-expand-md custom-navbar-main navbar-light">
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-item"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav row align-items-center">
-              <li class="nav-item col-md-auto">
-                <a class="nav-link" aria-current="page" href="index.html">Home</a>
-              </li>
-              <li class="nav-item col-md-auto">
-                <a class="nav-link" href="aboutus.html">About Us</a>
-              </li>
-              <li class="nav-item col-md-auto">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-            </ul>
-              <ul class="navbar-nav ms-auto justify-content-center">
-                <li class="nav-item col-md-auto">
-                  <a class="navbar-brand fw-light" href="index.html">FakeStore</a>
-                </li>  
-              </ul>
-          </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-item"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav row align-items-center">
+                    <li class="nav-item col-md-auto">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item col-md-auto">
+                        <a class="nav-link" href="aboutus.html">About Us</a>
+                    </li>
+                    <li class="nav-item col-md-auto">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto justify-content-center">
+                    <li class="nav-item col-md-auto">
+                        <a class="navbar-brand fw-light" href="index.html">FakeStore</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
-    
-      <div class="black-border"></div>
+    </nav>
+
+    <div class="black-border"></div>
 
     <section id="form" class="container-custom mx-auto shadow-lg m-5 pt-3 pb-5 ps-3 pe-3">
         <div>
             <h2 class="display-6 text-center fw-light">Complete Order</h2>
         </div>
         <div class="row my-2">
+            <div class="col-lg-6 order-lg-last ps-lg-5 p pe-lg-5 d-flex flex-column">
+                <h3 class="fw-normal text-center mb-4 mt-3">Selected product:</h3>
+                <div class="card text-center card-no-pointer">
+                    <div class="card-body">
+                        <h5 class="card-title">Product</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo totam eum iste
+                            exercitationem facere minus at quam, sequi aliquid voluptatem!.</p>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-6">
                 <form class="container-fluid d-flex flex-column mx-auto my-3 p-2">
                     <div class="row justify-content-center">
@@ -87,19 +97,10 @@
                         </div>
                     </div>
             </div>
-                    <div class="col-lg-6 ps-lg-5 pe-lg-5 d-flex flex-column">
-                      <h3 class="fw-normal text-center mb-4 mt-3">Selected product:</h3>
-                          <div class="card text-center card-no-pointer">
-                          <div class="card-body">
-                              <h5 class="card-title">Product</h5>
-                              <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo totam eum iste exercitationem facere minus at quam, sequi aliquid voluptatem!.</p>
-                          </div>
-                    </div>
-                </div>
-                    <div class="justify-content-center d-flex mt-2">
-                        <button type="submit" class="btn btn-lg btn-primary">Make Purchase</button>
-                    </div>
             </form>
+        </div>
+        <div class="justify-content-center d-flex mt-2">
+            <button type="submit" class="btn btn-lg btn-primary">Make Purchase</button>
         </div>
     </section>
 
@@ -107,5 +108,6 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </body>
-    <script src="scripts/main.js"></script>
+<script src="scripts/main.js"></script>
+
 </html>
