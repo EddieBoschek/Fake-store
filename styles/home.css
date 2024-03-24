@@ -212,10 +212,18 @@
   .customer-info-values p {
     margin-bottom: 1rem;
   }
+
+  .same-row-p {
+    display: block;
+  }
 }
 
 .customer-titles {
-  font-weight: 700;
+  font-weight: 500;
+}
+
+.customer-values {
+  margin-left: 3em;
 }
 
 .same-row-p {
