@@ -197,6 +197,29 @@
     font-weight: 400;
     text-decoration: none;
   }
+  .side-by-side-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .customer-info-titles,
+  .customer-info-values {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .customer-info-titles p,
+  .customer-info-values p {
+    margin-bottom: 1rem;
+  }
+}
+
+.customer-titles {
+  font-weight: 700;
+}
+
+.same-row-p {
+  display: inline-block;
 }
 
 .black-border {
