@@ -14,12 +14,13 @@
 
   <nav class="navbar navbar-expand-md custom-navbar-main navbar-light">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-item"
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav row align-items-center">
+      <div class="justify-content-center">
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="navbar-nav row align-items-center">
           <li class="nav-item col-md-auto">
             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
           </li>
@@ -30,6 +31,7 @@
             <a class="nav-link" href="contact.html">Contact</a>
           </li>
         </ul>
+        </div>
           <ul class="navbar-nav ms-auto justify-content-center">
             <li class="nav-item col-md-auto">
               <a class="navbar-brand fw-light" href="index.html">FakeStore</a>
@@ -39,24 +41,30 @@
     </div>
   </nav>
 
-  <nav class="navbar navbar-expand-lg custom-navbar-secondary shadow-sm">
+  <nav class="navbar navbar-expand-lg custom-navbar-secondary shadow-sm justify-content-center">
     <div class="container-fluid">
-      <div class="collapse navbar-collapse justify-content-center" id="navbar-secondary">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-secondary" 
+      aria-controls="navbar-secondary" aria-expanded="false" aria-label="Toggle navigation" id="category-button">
+        <span class="navbar-toggler-icon hidden-burger"></span>
+        Categories &#11206
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-secondary">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item col-md-auto">
-            <a href="#" class="nav-link-secondary" id="w-clothing">Women's Clothing</a>
-          </li>
-          <li class="nav-item col-md-auto" id="m-clothing">
-            <a href="#" class="nav-link-secondary">Men's Clothing</a>
+            <a href="#" class="nav-link nav-link-secondary" id="w-clothing">Women's Clothing</a>
           </li>
           <li class="nav-item col-md-auto">
-            <a href="#" class="nav-link-secondary" id="jewelery">Jewelery</a>
+            <a href="#" class="nav-link nav-link-secondary" id="m-clothing">Men's Clothing</a>
           </li>
           <li class="nav-item col-md-auto">
-            <a href="#" class="nav-link-secondary" id="electronics">Electronics</a>
+            <a href="#" class="nav-link nav-link-secondary" id="jewelery">Jewelry</a>
+          </li>
+          <li class="nav-item col-md-auto">
+            <a href="#" class="nav-link nav-link-secondary" id="electronics">Electronics</a>
           </li>
         </ul>
       </div>
+    </div>
   </nav>
 
   <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
