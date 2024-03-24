@@ -251,6 +251,11 @@
   .customer-info-values p {
     margin-bottom: 1rem;
   }
+
+  .customer-titles {
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+  }
 }
 
 @media only screen and (max-width: 991.98px) {
