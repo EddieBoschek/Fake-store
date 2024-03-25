@@ -55,7 +55,7 @@ class UI {
     this.clear();
     const items = products.map((item) => {
       const col = document.createElement("div");
-      col.className = "col-md-4 col-lg-3 col-xl-3 p-3 best";
+      col.className = "col-lg-3 col-sm-6 p-3 best";
 
       const card = document.createElement("div");
       card.className = "card h-100 mb-4";
