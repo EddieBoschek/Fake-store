@@ -55,16 +55,15 @@ class UI {
     this.clear();
     const items = products.map((item) => {
       const col = document.createElement("div");
-      col.className = "col-md-4 col-lg-3 col-xl-3 p-3 best";
+      col.className = "col-lg-3 col-sm-6 p-3 best";
 
       const card = document.createElement("div");
       card.className = "card h-100 mb-4";
 
-      card.setAttribute('data-id', item.id); // Set the product ID as a data attribute
+      card.setAttribute("data-id", item.id); // Set the product ID as a data attribute
       card.setAttribute("data-bs-toggle", "modal");
       card.setAttribute("data-bs-target", "#productModal");
       card.onclick = () => addContentToModal(item);
-
 
       const img = document.createElement("img");
       img.className = "card-img-top";
@@ -86,8 +85,6 @@ class UI {
       card.appendChild(img);
       card.appendChild(cardBody);
       col.appendChild(card);
-
-      
 
       return col;
     });
@@ -223,14 +220,17 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    document
+  document
     .getElementById("purchase-button")
     .addEventListener("click", function (event) {
       // Event listener for saving product ID to localStorage and redirecting
-         const productId = this.getAttribute('data-id');
-         localStorage.setItem('selectedProductId', productId);
-         console.log('Product ID saved to localStorage and redirecting:', productId);
-         window.location.href = "purchaseformBS.html"; // Redirect to the purchase form page
+      const productId = this.getAttribute("data-id");
+      localStorage.setItem("selectedProductId", productId);
+      console.log(
+        "Product ID saved to localStorage and redirecting:",
+        productId
+      );
+      window.location.href = "purchaseformBS.html"; // Redirect to the purchase form page
     });
 });
 
