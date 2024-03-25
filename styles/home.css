@@ -159,6 +159,10 @@
   font-size: 1.1rem;
 }
 
+.custom-text-size-small {
+  font-size: 0.8rem;
+}
+
 .text-with-shadow {
   text-shadow: 0 0 10px rgb(255, 255, 255);
 }
