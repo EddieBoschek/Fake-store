@@ -209,7 +209,6 @@
 }
 
 
-
 @media only screen and (max-device-width: 747px) {
   .custom-confirmation-card {
     width: 100%;
@@ -270,7 +269,7 @@
 
   .navbar-collapse, .collapse.navbar-collapse {
     position: absolute;
-    top: 100%;
+    top: 75%;
     width: 200px;
     left: 8px;
     background-color: #fff;
@@ -280,7 +279,30 @@
     border: 2px solid #000000;
   }
 
-  .nav-item {
-    text-align: left !important;
+  #navbar-secondary {
+    position: absolute;
+    top: 100%;
+    width: 200px;
+    left: 8px;
+    background-color: #fff;
+    border-radius: 8%;
+    z-index: 1000;
+    padding: 10px;
+    border: 2px solid #000000;
+
+  }
+
+  .nav-link:hover,
+  .nav-link:focus {
+    color: #888;
+  }
+
+  .nav-link-secondary:active {
+    color: #222222 !important;
+  }
+
+  .nav-link-secondary.active {
+    color: #000 !important;
+    font-weight: 800;
   }
 }
