@@ -231,24 +231,6 @@ body {
   width: 600px;
 }
 
-@media (max-width: 768px) {
-  .navbar-toggler {
-    position: relative;
-  }
-
-  .navbar-collapse,
-  .collapse.navbar-collapse {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    z-index: 1000;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-}
-
 @media only screen and (max-device-width: 747px) {
   .custom-confirmation-card {
     width: 100%;
@@ -287,6 +269,24 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
+
+  .about-text {
+    width: 500px;
+  }
+  .lg-view{
+    display:none;
+  }
+
+  .sm-view{
+    display:inline-block;
+  }
+
+  .contact-text {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
   #navbar-secondary {
     display: none;
   }
@@ -302,20 +302,54 @@ body {
   .customer-titles {
     padding-left: 10%;
   }
-  .about-text {
-    width: 500px;
+
+  .navbar-toggler {
+    position: relative;
   }
+
+
+  .navbar-collapse, .collapse.navbar-collapse {
+    position: absolute;
+    top: 75%;
+    width: 200px;
+    left: 8px;
+    background-color: #fff;
+    border-radius: 6%;
+    z-index: 1000;
+    padding: 10px;
+    border: 2px solid #000000;
+    z-index: 1200;
+  }
+
+  #navbar-secondary {
+    top: 100%;
+    z-index: 1100;
+
   .lg-view {
     display: none;
   }
 
   .sm-view {
     display: inline-block;
+
   }
 
-  .contact-text {
-    width: 500px;
+  .nav-link:hover,
+  .nav-link:focus {
+    color: #888;
   }
+
+  .nav-link-secondary:active {
+    color: #222222 !important;
+  }
+
+
+  .nav-link-secondary.active {
+    color: #000 !important;
+    font-weight: 800;
+  }
+}
+
 }
 
 #pfCard:hover {
