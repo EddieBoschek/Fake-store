@@ -55,16 +55,15 @@ class UI {
     this.clear();
     const items = products.map((item) => {
       const col = document.createElement("div");
-      col.className = "col-md-4 col-lg-3 col-xl-3 p-3 best";
+      col.className = "col-lg-3 col-sm-6 p-3 best";
 
       const card = document.createElement("div");
       card.className = "card h-100 mb-4";
 
-      card.setAttribute('data-id', item.id); // Set the product ID as a data attribute
+      card.setAttribute("data-id", item.id); // Set the product ID as a data attribute
       card.setAttribute("data-bs-toggle", "modal");
       card.setAttribute("data-bs-target", "#productModal");
       card.onclick = () => addContentToModal(item);
-
 
       const img = document.createElement("img");
       img.className = "card-img-top";
@@ -87,13 +86,11 @@ class UI {
       card.appendChild(cardBody);
       col.appendChild(card);
 
-      
-
       return col;
     });
 
     const container = document.createElement("div");
-    container.className = "container-xl p-5 my-5";
+    container.className = "container-xl p-5";
 
     const row = document.createElement("div");
     row.className = "row row-cols-1 row-cols-md-3 g-2";
@@ -224,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    document
+  document
     .getElementById("purchase-button")
     .addEventListener("click", function (event) {
       // Event listener for saving product ID to localStorage and redirecting
