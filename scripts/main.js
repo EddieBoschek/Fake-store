@@ -113,6 +113,7 @@ class UI {
 const addContentToModal = (item) => {
   const modal = document.getElementById("productModal");
   if (modal) {
+    localStorage.setItem('selectedProductId', item.id);
     document.querySelector(".modal-title").innerHTML = item.title;
     document.querySelector(".rounded").src = item.image;
     document.querySelector(".description").innerHTML = item.description;
@@ -224,15 +225,59 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("purchase-button")
     .addEventListener("click", function (event) {
       // Event listener for saving product ID to localStorage and redirecting
-      const productId = this.getAttribute("data-id");
-      localStorage.setItem("selectedProductId", productId);
-      console.log(
-        "Product ID saved to localStorage and redirecting:",
-        productId
-      );
-      window.location.href = "purchaseformBS.html"; // Redirect to the purchase form page
+        const productId = localStorage.getItem('selectedProductId');
+        console.log('Product ID saved to localStorage and redirecting: ' + productId);
+        window.location.href = "purchaseformBS.html";
     });
 });
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+  const productNameElement = document.getElementById('product-name-pf');
+  
+  if (productNameElement) {
+    // Retrieve the selected product ID from localStorage
+    const selectedProductId = localStorage.getItem('selectedProductId');
+    console.log(selectedProductId);
+    
+    if (selectedProductId) {
+      // Fetch the product details using the saved product ID
+      await fetch(`https://fakestoreapi.com/products/${selectedProductId}`)
+        .then(async response => {
+          console.log(response);
+          // Check if the response is ok
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          console.log('fetched from ID ' + selectedProductId);
+          const data = await response.json();
+          console.log(data);
+          return data;
+        })
+        .then(product => {
+          // Function for updating the product details in HTML
+          displayProductDetails(product);
+        })
+        .catch(error => {
+          console.error('Error fetching product:', error);
+          // Optionally, update the UI to indicate that an error occurred
+        });
+    }
+  }
+});
+
+function displayProductDetails(product) {
+  // Get the elements by ID
+  const productNameElement = document.getElementById('product-name-pf');
+  const productDescElement = document.getElementById('product-desc-pf');
+  
+  // Update the elements with the product details
+  if (productNameElement && productDescElement) {
+    productNameElement.textContent = product.title;
+    productDescElement.textContent = product.description;
+  }
+}
+
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
