@@ -312,10 +312,12 @@
     z-index: 1000;
     padding: 10px;
     border: 2px solid #000000;
+    z-index: 1200;
   }
 
   #navbar-secondary {
     top: 100%;
+    z-index: 1100;
   }
 
   .nav-link:hover,
