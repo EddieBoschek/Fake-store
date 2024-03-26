@@ -295,14 +295,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function displayProductDetails(product) {
   // Get the elements by ID
+  const productImgElement = document.getElementById("product-img-pf");
   const productNameElement = document.getElementById("product-name-pf");
   const productDescElement = document.getElementById("product-desc-pf");
+  const productPriceElement = document.getElementById("product-price-pf");
 
   // Update the elements with the product details
-  if (productNameElement && productDescElement) {
-    productNameElement.textContent = product.title;
-    productDescElement.textContent = product.description;
-  }
+  productImgElement.src = product.image;
+  productNameElement.textContent = product.title;
+  productDescElement.textContent = product.description;
+  productPriceElement.textContent = "Price: $" + product.price;
 }
 
 document.getElementById("form").addEventListener("submit", function (event) {
