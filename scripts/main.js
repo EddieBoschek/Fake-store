@@ -231,7 +231,33 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       window.location.href = "purchaseformBS.html";
     });
+
+  document.getElementById("navbarLinks").addEventListener("click", (e) => {
+    const toggle = document.getElementById("navbar-secondary");
+    const collapse = new bootstrap.Collapse(toggle, {
+      toggle: false,
+    });
+    collapse.hide();
+  });
 });
+
+const collapseNavs = () => {
+  const links = document.getElementById("navbar-collapse");
+  if (links) {
+    const collapseLinks = new bootstrap.Collapse(links, {
+      toggle: false,
+    });
+    collapseLinks.hide();
+  }
+
+  const categories = document.getElementById("navbar-secondary");
+  if (categories) {
+    const collapseCategories = new bootstrap.Collapse(categories, {
+      toggle: false,
+    });
+    collapseCategories.hide();
+  }
+};
 
 document.addEventListener("DOMContentLoaded", async () => {
   const productNameElement = document.getElementById("product-name-pf");
