@@ -155,10 +155,6 @@
   overflow-y: scroll;
 }
 
-.custom-text-size {
-  font-size: 1.1rem;
-}
-
 .custom-text-size-small {
   font-size: 0.8rem;
 }
@@ -208,6 +204,44 @@
   display: none;
 }
 
+.about-text {
+  width: 750px;
+}
+
+.fakestore-statement {
+  width: 750px;
+}
+
+.lg-view{
+  font-size: 1.1rem;
+  display:inline-block;
+}
+
+.sm-view{
+  font-size: 1.1rem;
+  display:none;
+}
+
+.contact-text {
+  width: 600px;
+}
+
+@media (max-width: 768px) {
+  .navbar-toggler {
+    position: relative;
+  }
+
+  .navbar-collapse, .collapse.navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+}
 
 @media only screen and (max-device-width: 747px) {
   .custom-confirmation-card {
@@ -246,6 +280,24 @@
   }
 }
 
+@media only screen and (max-width: 768px) {
+
+  .about-text {
+    width: 500px;
+  }
+  .lg-view{
+    display:none;
+  }
+
+  .sm-view{
+    display:inline-block;
+  }
+
+  .contact-text {
+    width: 500px;
+  }
+}
+
 @media only screen and (max-width: 991.98px) {
   #navbar-secondary {
     display: none;
@@ -273,23 +325,14 @@
     width: 200px;
     left: 8px;
     background-color: #fff;
-    border-radius: 8%;
+    border-radius: 6%;
     z-index: 1000;
     padding: 10px;
     border: 2px solid #000000;
   }
 
   #navbar-secondary {
-    position: absolute;
     top: 100%;
-    width: 200px;
-    left: 8px;
-    background-color: #fff;
-    border-radius: 8%;
-    z-index: 1000;
-    padding: 10px;
-    border: 2px solid #000000;
-
   }
 
   .nav-link:hover,
