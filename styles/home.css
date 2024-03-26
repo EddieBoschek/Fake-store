@@ -208,22 +208,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
-  .navbar-toggler {
-    position: relative;
-  }
 
-  .navbar-collapse, .collapse.navbar-collapse {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    z-index: 1000;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-}
 
 @media only screen and (max-device-width: 747px) {
   .custom-confirmation-card {
@@ -286,11 +271,16 @@
   .navbar-collapse, .collapse.navbar-collapse {
     position: absolute;
     top: 100%;
-    left: 0;
-    width: 30%;
+    width: 200px;
+    left: 8px;
     background-color: #fff;
+    border-radius: 8%;
     z-index: 1000;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #000000;
+  }
+
+  .nav-item {
+    text-align: left !important;
   }
 }
