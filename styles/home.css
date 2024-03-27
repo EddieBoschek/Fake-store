@@ -278,26 +278,6 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-  #navbar-secondary {
-    display: none;
-  }
-  .dropdown {
-    display: block;
-  }
-  .nav-link-secondary {
-    color: #999;
-    font-weight: 400;
-    text-decoration: none;
-
-    &.active {
-      color: #000 !important;
-      font-weight: 800;
-    }
-  }
-
-  .customer-titles {
-    padding-left: 10%;
-  }
   .about-text {
     width: 500px;
   }
@@ -311,6 +291,69 @@ body {
 
   .contact-text {
     width: 500px;
+  }
+}
+
+@media only screen and (max-width: 991.98px) {
+  #navbar-secondary {
+    display: none;
+  }
+  .dropdown {
+    display: block;
+  }
+  .nav-link-secondary {
+    color: #999;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .customer-titles {
+    padding-left: 10%;
+  }
+
+  .navbar-toggler {
+    position: relative;
+  }
+
+  .navbar-collapse,
+  .collapse.navbar-collapse {
+    position: absolute;
+    top: 75%;
+    width: 200px;
+    left: 8px;
+    background-color: #fff;
+    border-radius: 6%;
+    z-index: 1000;
+    padding: 10px;
+    border: 2px solid #000000;
+    z-index: 1200;
+  }
+
+  #navbar-secondary {
+    top: 100%;
+    z-index: 1100;
+
+    .lg-view {
+      display: none;
+    }
+
+    .sm-view {
+      display: inline-block;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: #888;
+    }
+
+    .nav-link-secondary:active {
+      color: #222222 !important;
+    }
+
+    .nav-link-secondary.active {
+      color: #000 !important;
+      font-weight: 800;
+    }
   }
 }
 
