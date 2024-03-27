@@ -209,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("purchase-button")
     .addEventListener("click", function (event) {
-      console.log("hey");
       // Event listener for saving product ID to localStorage and redirecting
       const productId = localStorage.getItem("selectedProductId");
       console.log(
