@@ -179,51 +179,37 @@ const emptyStar = () => {
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
+  const categories = new Map([
+    ["Women's Clothing", "women"],
+    ["Men's Clothing", "men"],
+    ["Jewellery", "jewelery"],
+    ["Electronics", "electronics"],
+  ]);
   let category = "product";
 
   products
     .getProducts(category)
     .then((products) => ui.displayProducts(products));
 
-  document
-    .getElementById("m-clothing")
-    .addEventListener("click", function (event) {
-      category = "men";
+  let collection = document.getElementsByClassName("nav-link-secondary");
+  Array.from(collection).forEach((element) => {
+    element.addEventListener("click", (event) => {
+      let current = document.getElementsByClassName("active");
+      if (current) {
+        current[0].classList.remove("active");
+      }
+      event.currentTarget.classList.add("active");
+      category = categories.get(element.innerHTML);
       products.getProducts(category).then((products) => {
         ui.displayProducts(products);
       });
     });
-
-  document
-    .getElementById("w-clothing")
-    .addEventListener("click", function (event) {
-      category = "women";
-      products.getProducts(category).then((products) => {
-        ui.displayProducts(products);
-      });
-    });
-
-  document
-    .getElementById("jewelery")
-    .addEventListener("click", function (event) {
-      category = "jewelery";
-      products.getProducts(category).then((products) => {
-        ui.displayProducts(products);
-      });
-    });
-
-  document
-    .getElementById("electronics")
-    .addEventListener("click", function (event) {
-      category = "electronics";
-      products.getProducts(category).then((products) => {
-        ui.displayProducts(products);
-      });
-    });
+  });
 
   document
     .getElementById("purchase-button")
     .addEventListener("click", function (event) {
+      console.log("hey");
       // Event listener for saving product ID to localStorage and redirecting
       const productId = localStorage.getItem("selectedProductId");
       console.log(
