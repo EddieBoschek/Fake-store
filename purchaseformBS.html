@@ -5,7 +5,6 @@
     <title>Purchase Form</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- BYT BILD FÖR DET FINNS TV OCH SHIT MEN VI BÖR HA EN FIN IKON ASSÅ -->
     <link rel="icon" type="image/x-icon" href="images/galge.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -51,7 +50,21 @@
         </div>
         <div class="row my-2">
             <div class="col-lg-6 order-lg-last ps-lg-5 p pe-lg-5 d-flex flex-column">
-                <h3 class="fw-normal text-center mb-4 mt-3">Selected product:</h3>
+              <section class="container content-section">
+                <h3 class="fw-normal text-center mb-4 mt-3">Your Cart:</h3>
+                <div class="cart-row">
+                    <span class="cart-item cart-header cart-column">ITEM</span>
+                    <span class="cart-price cart-header cart-column">PRICE</span>
+                    <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+                </div>
+                <div class="cart-items">
+                </div>
+                <div class="cart-total">
+                    <strong class="cart-total-title">Total</strong>
+                    <span class="cart-total-price">$0</span>
+                </div>
+            </section>
+                <!--<h3 class="fw-normal text-center mb-4 mt-3">Selected product:</h3>
                 <div class="card text-center" id="pfCard">
                   <img class="card-img-top" id="product-img-pf" alt="No image found!">
                   <div class="card-body">
@@ -60,7 +73,7 @@
                     <p class="card-text" id="product-desc-pf"></p>
                     <h5 id="product-price-pf"></h5>
                   </div>
-                </div>
+                </div>-->
             </div>
             <div class="col-lg-6">
                 <form class="container-fluid d-flex flex-column mx-auto my-3 p-2">

@@ -49,16 +49,21 @@
       <h2 class="display-6 text-center fw-light mb-4">Order Confirmation</h2>
     </div>
     <div class="row my-2">
-      <div class="custom-confirmation-card order-lg-last col-lg-5 ps-lg-5 pe-lg-5 order-lg-last d-flex flex-column">
-        <h3 class="fw-normal text-center mb-4 mt-3">Ordered product:</h3>
-        <div class="card text-center" id="pfCard">
-          <img class="card-img-top" id="product-img-pf" alt="No image found!">
-          <div class="card-body">                    
-            <h5 class="card-title" id="product-name-pf"></h5>
-            <p class="card-text" id="product-desc-pf"></p>
-            <h5 id="product-price-pf"></h5>
+      <div class="order-lg-last col-lg-5 ps-lg-5 pe-lg-5 order-lg-last d-flex flex-column">
+        <section class="container content-section">
+          <h3 class="fw-normal text-center mb-4 mt-3">Your Cart:</h3>
+          <div class="cart-row">
+              <span class="cart-item cart-header cart-column">ITEM</span>
+              <span class="cart-price cart-header cart-column">PRICE</span>
+              <span class="cart-quantity cart-header cart-column">QUANTITY</span>
           </div>
-        </div>
+          <div class="cart-items">
+          </div>
+          <div class="cart-total">
+              <strong class="cart-total-title">Total</strong>
+              <span class="cart-total-price">$0</span>
+          </div>
+      </section>
       </div>
       <div class="ps-lg-5 pe-lg-1 col-lg-7 d-flex flex-column">
         <h3 class="fw-normal text-lg-start text-center mb-4 mt-3">Customer:</h3>
