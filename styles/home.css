@@ -59,6 +59,35 @@ body {
   color: #606060;
 }
 
+.navbar-cart-pack {
+  display: flex;
+  padding: 30px;
+  transform: translate(-50%, -50%);
+  left: 95%;
+  top: 48%;
+  position: absolute;
+}
+
+.navbar-cart {
+  width: 36px;
+  height: 36px;
+  position: relative;
+}
+
+.navbar-cart-pack span{
+  display: flex;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 58%;
+  right: 25%
+}
+
 .custom-navbar-secondary {
   background-color: #000;
   color: #fff;
