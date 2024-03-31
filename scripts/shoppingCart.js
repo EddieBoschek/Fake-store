@@ -1,3 +1,82 @@
+let listCartHTML = document.querySelector('.listCart');
+let iconCart = document.querySelector('navbar-cart')
+let iconCartSpan = document.querySelector('.icon-cart span');
+let products = [];
+let cart = [];
+
+    
+    
+const addToCart = (product_id) => {
+    let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
+    if(cart.length <= 0){
+        cart = [{
+            product_id: product_id,
+            quantity: 1
+        }];
+    }else if(positionThisProductInCart < 0){
+        cart.push({
+            product_id: product_id,
+            quantity: 1
+        });
+    }else{
+        cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
+    }
+    addCartToHTML();
+    addCartToMemory();
+}
+const addCartToMemory = () => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+const addCartToHTML = () => {
+    listCartHTML.innerHTML = '';
+    let totalQuantity = 0;
+    if(cart.length > 0){
+        cart.forEach(item => {
+            totalQuantity = totalQuantity + item.quantity;
+
+
+            let newItem = document.createElement('div');
+            newItem.classList.add('item');
+            newItem.dataset.id = item.product_id;
+
+            let positionProduct = products.findIndex((value) => value.id == item.product_id);
+            let info = products[positionProduct];
+            listCartHTML.appendChild(newItem);
+            newItem.innerHTML = `
+            <div class="image">
+                    <img src="${info.image}">
+                </div>
+                <div class="name">
+                ${info.name}
+                </div>
+                <div class="totalPrice">$${info.price * item.quantity}</div>
+                <div class="quantity">
+                    <span class="minus"><</span>
+                    <span>${item.quantity}</span>
+                    <span class="plus">></span>
+                </div>
+            `;
+        })
+    }
+
+
+    iconCartSpan.innerText = totalQuantity;
+}
+
+const initApp = () => {
+    getProducts(category) // Metod av Basse
+
+        // get data cart from memory
+        if(localStorage.getItem('cart')){
+            cart = JSON.parse(localStorage.getItem('cart'));
+            addCartToHTML();
+        }
+}
+initApp();
+
+
+
+
 if (document.readyState == 'loading') {
   document.addEventListener('DOMContentLoaded', ready)
 } else {
@@ -101,3 +180,8 @@ function updateCartTotal() {
   total = Math.round(total * 100) / 100
   document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
+
+
+iconCart.addEventListener('click', () => {
+  console.log("Cart clicked");
+})
