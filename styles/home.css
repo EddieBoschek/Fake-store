@@ -72,9 +72,10 @@ body {
   width: 36px;
   height: 36px;
   position: relative;
+  cursor: pointer;
 }
 
-.navbar-cart-pack span{
+.navbar-cart-pack span {
   display: flex;
   width: 20px;
   height: 20px;
@@ -85,7 +86,7 @@ body {
   border-radius: 50%;
   position: absolute;
   top: 58%;
-  right: 25%
+  right: 25%;
 }
 
 .custom-navbar-secondary {
@@ -398,7 +399,6 @@ body {
   left: 0;
   width: 100%;
 }
-
 
 .content-section {
   margin: 1em;

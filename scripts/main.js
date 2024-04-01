@@ -47,6 +47,9 @@ class Products {
   }
 }
 
+let iconCart = document.getElementById('cart-button')
+let iconCartSpan = document.querySelector('.icon-cart span');
+
 const addCartToMemory = () => {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
@@ -55,6 +58,23 @@ let cart = [];
     if(localStorage.getItem("cart")){
       cart = JSON.parse(localStorage.getItem('cart'));
     }
+
+    function updateCartTotal() {
+      let cartItemContainer = document.getElementsByClassName('cart-items')[0]
+      let cartRows = cartItemContainer.getElementsByClassName('cart-row')
+      let total = 0
+      for (let i = 0; i < cartRows.length; i++) {
+        let cartRow = cartRows[i]
+        let priceElement = cartRow.getElementsByClassName('cart-price')[0]
+        let quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+        let price = parseFloat(priceElement.innerText.replace('$', ''))
+        let quantity = quantityElement.value
+        total = total + (price * quantity)
+      }
+      total = Math.round(total * 100) / 100
+      document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
+    }
+
 
 document.addEventListener("DOMContentLoaded", function() {
   if (document.body.classList.contains('standard')) {
@@ -188,7 +208,8 @@ document.addEventListener("DOMContentLoaded", function() {
       return starSvg;
     };
 
-    document.addEventListener("DOMContentLoaded", () => {
+    
+      console.log("Standard")
       const ui = new UI();
       const products = new Products();
       const categories = new Map([
@@ -197,7 +218,6 @@ document.addEventListener("DOMContentLoaded", function() {
         ["Jewellery", "jewelery"],
         ["Electronics", "electronics"],
       ]);
-      let category = "product";
 
       products
         .getProducts(category)
@@ -216,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
             ui.displayProducts(products);
           });
         });
-      });
+      
 
       document.getElementById("navbarLinks").addEventListener("click", (e) => {
         const toggle = document.getElementById("navbar-secondary");
@@ -278,8 +298,21 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (document.body.classList.contains('cart-and-form')) {
+    console.log("Cart and form");
     const allProducts = products.getProducts();
     displayCart();
+
+    let removeCartItemButtons = document.getElementsByClassName('btn-danger')
+    for (let i = 0; i < removeCartItemButtons.length; i++) {
+        let button = removeCartItemButtons[i]
+        button.addEventListener('click', removeCartItem)
+    }
+
+    let quantityInputs = document.getElementsByClassName('cart-quantity-input')
+    for (let i = 0; i < quantityInputs.length; i++) {
+      let input = quantityInputs[i]
+      input.addEventListener('change', quantityChanged)
+  }
 
     function displayCart() {
       let cartItems = document.getElementsByClassName('cart-items')[0]
@@ -290,7 +323,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
               let cartRow = document.createElement('div');
               cartRow.classList.add('cart-row');
-              cartRow.dataset.id = item.product_id; // ???
+              cartRow.dataset.id = item.product_id;
   
               let positionProduct = allProducts.findIndex((value) => value.id == item.product_id);
               let info = allProducts[positionProduct];
@@ -312,16 +345,30 @@ document.addEventListener("DOMContentLoaded", function() {
           })
       }
       iconCartSpan.innerText = totalQuantity;
+      updateCartTotal();
   }
 
   function removeCartItem(event) {
-    var buttonClicked = event.target
+    let buttonClicked = event.target
+    let product_id = buttonClicked.parentElement.parentElement.dataset.id;
     buttonClicked.parentElement.parentElement.remove()
+    let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
+    cart.splice(positionItemInCart, 1);
 
-    // ?????????
-  
     addCartToMemory();
     updateCartTotal()
+  }
+
+  function quantityChanged(event) {
+    let input = event.target
+    let product_id = input.parentElement.parentElement.dataset.id;
+    let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1
+    }
+    cart[positionItemInCart].quantity = input.value;
+    addCartToMemory();
+    updateCartTotal();
   }
 
     function tryPurchase() {
@@ -409,8 +456,54 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("addressError").innerHTML = "&nbsp;";
     document.getElementById("zipError").innerHTML = "&nbsp;";
     document.getElementById("cityError").innerHTML = "&nbsp;";
-  }
+    }
   }
 
-  // Och så vidare för andra sidor...
+  if (document.body.classList.contains('cart-and-form')) {
+    const allProducts = products.getProducts();
+    displayPurchase();
+    document.getElementById("firstNameCon").textContent =
+    localStorage.getItem("first-name");
+    document.getElementById("lastNameCon").textContent =
+    localStorage.getItem("last-name");
+    document.getElementById("emailCon").textContent =
+    localStorage.getItem("email");
+    document.getElementById("phoneCon").textContent =
+    localStorage.getItem("phone");
+    document.getElementById("addressCon").textContent =
+    localStorage.getItem("address");
+    document.getElementById("zipCon").textContent = localStorage.getItem("zip");
+    document.getElementById("cityCon").textContent = localStorage.getItem("city");
+    }
+
+    function displayPurchase() {
+      let cartItems = document.getElementsByClassName('cart-items')[0]
+      let totalQuantity = 0;
+      if(cart.length > 0){
+          cart.forEach(item => {
+              
+              let cartRow = document.createElement('div');
+              cartRow.classList.add('cart-row');
+              cartRow.dataset.id = item.product_id;
+  
+              let positionProduct = allProducts.findIndex((value) => value.id == item.product_id);
+              let info = allProducts[positionProduct];
+              listCartHTML.appendChild(cartRow);
+              var cartRowContents = `
+        <div class="cart-item cart-column">
+            <img class="cart-item-image" src="${info.image}" width="100" height="100">
+            <span class="cart-item-title">${info.name}</span>
+        </div>
+        <span class="cart-price cart-column">${info.price * item.quantity}</span>
+        <div class="cart-quantity cart-column">
+            <p>Quantity: ${item.quantity}"<p/>
+        </div>`
+        cartRow.innerHTML = cartRowContents
+        cartItems.add(cartRow);
+          })
+      }
+      iconCartSpan.innerText = 0;
+      localStorage.clear();
+  }
+
   });
