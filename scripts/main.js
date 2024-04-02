@@ -46,9 +46,14 @@ class Products {
     }
   }
 }
+const products = new Products();
+let category = "product";
+let allProducts = [];
+
+let dataLoaded = false;
 
 let iconCart = document.getElementById('cart-button')
-let iconCartSpan = document.querySelector('.icon-cart span');
+let iconCartNumber = document.getElementById('cart-quantity');
 
 const addCartToMemory = () => {
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -59,28 +64,46 @@ let cart = [];
       cart = JSON.parse(localStorage.getItem('cart'));
     }
 
-    function updateCartTotal() {
-      let cartItemContainer = document.getElementsByClassName('cart-items')[0]
-      let cartRows = cartItemContainer.getElementsByClassName('cart-row')
-      let total = 0
-      for (let i = 0; i < cartRows.length; i++) {
-        let cartRow = cartRows[i]
-        let priceElement = cartRow.getElementsByClassName('cart-price')[0]
-        let quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        let price = parseFloat(priceElement.innerText.replace('$', ''))
-        let quantity = quantityElement.value
-        total = total + (price * quantity)
-      }
-      total = Math.round(total * 100) / 100
-      document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
-    }
+products.getProducts(category).then(products => {
+          
+  products.forEach(product => {
+    allProducts.push(product);
+  });
 
+}).catch(error => {
+  console.error("Products did not load.", error);
+});
+
+function updateCartTotal() {
+  let cartItemContainer = document.getElementsByClassName('cart-items')[0]
+  let cartRows = cartItemContainer.getElementsByClassName('cart-row')
+  let total = 0
+  for (let i = 0; i < cartRows.length; i++) {
+    let cartRow = cartRows[i]
+    let priceElement = cartRow.getElementsByClassName('cart-price')[0]
+    let quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+    let price = parseFloat(priceElement.innerText.replace('$', ''))
+    let quantity = quantityElement.value
+    total = total + (price * quantity)
+  }
+  total = Math.round(total * 100) / 100
+  document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
+}
+
+function updateCartQuantity() {
+  let totalQuantity = 0;
+  if(cart.length > 0){
+    cart.forEach(item => {
+      totalQuantity = totalQuantity + item.quantity;
+    });
+  }
+  iconCartNumber.innerText = totalQuantity;
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   if (document.body.classList.contains('standard')) {
 
     const productsDOM = document.querySelector(".products-layout");
-    let category = "product";
 
     class UI {
       displayProducts(products) {
@@ -207,11 +230,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
       return starSvg;
     };
-
     
       console.log("Standard")
       const ui = new UI();
-      const products = new Products();
       const categories = new Map([
         ["Women's Clothing", "women"],
         ["Men's Clothing", "men"],
@@ -288,19 +309,20 @@ document.addEventListener("DOMContentLoaded", function() {
             cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
         }
         addCartToMemory();
+        updateCartQuantity()
     }
 
     iconCart.addEventListener('click', () => {
       console.log("Cart clicked");
       window.location.href = "purchaseformBS.html";
     })
-
   }
 
   if (document.body.classList.contains('cart-and-form')) {
     console.log("Cart and form");
-    const allProducts = products.getProducts();
-    displayCart();
+    setTimeout(() => {
+      displayCart();
+    }, 1000);
 
     let removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -312,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < quantityInputs.length; i++) {
       let input = quantityInputs[i]
       input.addEventListener('change', quantityChanged)
-  }
+    }
 
     function displayCart() {
       let cartItems = document.getElementsByClassName('cart-items')[0]
@@ -324,25 +346,24 @@ document.addEventListener("DOMContentLoaded", function() {
               let cartRow = document.createElement('div');
               cartRow.classList.add('cart-row');
               cartRow.dataset.id = item.product_id;
-  
               let positionProduct = allProducts.findIndex((value) => value.id == item.product_id);
-              let info = allProducts[positionProduct];
-              listCartHTML.appendChild(cartRow);
-              var cartRowContents = `
+              let product = allProducts[positionProduct];
+              console.log(product);
+              let cartRowContents = `
         <div class="cart-item cart-column">
-            <img class="cart-item-image" src="${info.image}" width="100" height="100">
-            <span class="cart-item-title">${info.name}</span>
+            <img class="cart-item-image" src="${product.image}" width="100" height="100">
+            <span class="cart-item-title">${product.title}</span>
         </div>
-        <span class="cart-price cart-column">${info.price * item.quantity}</span>
+        <span class="cart-price cart-column">${product.price * item.quantity}</span>
         <div class="cart-quantity cart-column">
             <input class="cart-quantity-input" type="number" value="${item.quantity}">
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`
         cartRow.innerHTML = cartRowContents
-        cartItems.add(cartRow);
+        cartItems.append(cartRow);
         cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
         cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
-          })
+          });
       }
       iconCartSpan.innerText = totalQuantity;
       updateCartTotal();
@@ -356,7 +377,8 @@ document.addEventListener("DOMContentLoaded", function() {
     cart.splice(positionItemInCart, 1);
 
     addCartToMemory();
-    updateCartTotal()
+    updateCartQuantity();
+    updateCartTotal();
   }
 
   function quantityChanged(event) {
@@ -368,12 +390,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     cart[positionItemInCart].quantity = input.value;
     addCartToMemory();
+    updateCartQuantity();
     updateCartTotal();
   }
 
-    function tryPurchase() {
+    
       document.getElementById("form").addEventListener("submit", function (event) {
         event.preventDefault();
+        tryPurchase()
+
+        function tryPurchase() {
 
         let firstName = document.getElementById("fname").value;
         let lastName = document.getElementById("lname").value;
@@ -432,7 +458,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
           window.location.href = "confirmation.html";
         }
-      });
+      }
+    });
+      
   }
 
   function validInputSize(input) {
@@ -457,11 +485,12 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("zipError").innerHTML = "&nbsp;";
     document.getElementById("cityError").innerHTML = "&nbsp;";
     }
-  }
+  });
 
-  if (document.body.classList.contains('cart-and-form')) {
-    const allProducts = products.getProducts();
-    displayPurchase();
+  if (document.body.classList.contains('confirmation')) {
+    setTimeout(() => {
+      displayPurchase();
+    }, 1000);
     document.getElementById("firstNameCon").textContent =
     localStorage.getItem("first-name");
     document.getElementById("lastNameCon").textContent =
@@ -481,29 +510,24 @@ document.addEventListener("DOMContentLoaded", function() {
       let totalQuantity = 0;
       if(cart.length > 0){
           cart.forEach(item => {
-              
               let cartRow = document.createElement('div');
               cartRow.classList.add('cart-row');
               cartRow.dataset.id = item.product_id;
-  
               let positionProduct = allProducts.findIndex((value) => value.id == item.product_id);
-              let info = allProducts[positionProduct];
-              listCartHTML.appendChild(cartRow);
+              let product = allProducts[positionProduct];
               var cartRowContents = `
         <div class="cart-item cart-column">
-            <img class="cart-item-image" src="${info.image}" width="100" height="100">
-            <span class="cart-item-title">${info.name}</span>
+            <img class="cart-item-image" src="${product.image}" width="100" height="100">
+            <span class="cart-item-title">${product.title}</span>
         </div>
-        <span class="cart-price cart-column">${info.price * item.quantity}</span>
+        <span class="cart-price cart-column">${product.price * item.quantity}</span>
         <div class="cart-quantity cart-column">
-            <p>Quantity: ${item.quantity}"<p/>
+            <p>Quantity: ${item.quantity}<p/>
         </div>`
         cartRow.innerHTML = cartRowContents
-        cartItems.add(cartRow);
+        cartItems.append(cartRow);
           })
       }
-      iconCartSpan.innerText = 0;
+      iconCartNumber.innerText = 0;
       localStorage.clear();
   }
-
-  });
