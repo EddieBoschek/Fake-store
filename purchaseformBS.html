@@ -45,7 +45,7 @@
                   <svg class="navbar-cart" id="cart-button" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
                   </svg>
-                  <span>0</span>
+                  <span id="cart-quantity"></span>
                 </li>  
               </ul>
 
@@ -61,7 +61,8 @@
         </div>
         <div class="row my-2">
             <div class="col-lg-6 order-lg-last ps-lg-5 p pe-lg-5 d-flex flex-column">
-              <section class="container content-section">
+
+              <section class="container-cart content-section">
                 <h3 class="fw-normal text-center mb-4 mt-3">Your Cart:</h3>
                 <div class="cart-row">
                     <span class="cart-item cart-header cart-column">ITEM</span>
@@ -71,20 +72,12 @@
                 <div class="cart-items">
                 </div>
                 <div class="cart-total">
+                  <button id="remove-all" class="btn btn-warning me-3" type="button">Remove All</button>
                     <strong class="cart-total-title">Total</strong>
                     <span class="cart-total-price">$0</span>
                 </div>
-            </section>
-                <!--<h3 class="fw-normal text-center mb-4 mt-3">Selected product:</h3>
-                <div class="card text-center" id="pfCard">
-                  <img class="card-img-top" id="product-img-pf" alt="No image found!">
-                  <div class="card-body">
-                    <h5 class="card-title" id="product-name-pf"></h5>
-                    <div class="card-divider"></div>
-                    <p class="card-text" id="product-desc-pf"></p>
-                    <h5 id="product-price-pf"></h5>
-                  </div>
-                </div>-->
+              </section>
+
             </div>
             <div class="col-lg-6">
                 <form class="container-fluid d-flex flex-column mx-auto my-3 p-2">
@@ -126,7 +119,7 @@
                     </div>
             </div>
             <div class="justify-content-center order-lg-last d-flex mt-2">
-                <button type="submit" class="btn btn-lg btn-primary">Make Purchase</button>
+                <button id="make-purchase" class="btn btn-lg btn-primary">Make Purchase</button>
             </div>
                 </form>
         </div>

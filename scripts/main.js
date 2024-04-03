@@ -87,6 +87,7 @@ function updateCartTotal() {
     total = total + (price * quantity)
   }
   total = Math.round(total * 100) / 100
+  console.log(total);
   document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
 
@@ -97,12 +98,14 @@ function updateCartQuantity() {
       totalQuantity = totalQuantity + item.quantity;
     });
   }
+  console.log("Updates Quantity: " + totalQuantity)
   iconCartNumber.innerText = totalQuantity;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   if (document.body.classList.contains('standard')) {
 
+    updateCartQuantity();
     const productsDOM = document.querySelector(".products-layout");
 
     class UI {
@@ -322,6 +325,24 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("Cart and form");
     setTimeout(() => {
       displayCart();
+
+      let contentDiv = document.getElementsByClassName("cart-items")[0];
+      let maxHeight = 200;
+
+      if (contentDiv.scrollHeight > maxHeight) {
+          contentDiv.style.overflowY = "scroll";
+      } else {
+          contentDiv.style.overflowY = "auto";
+      }
+
+      contentDiv.addEventListener("scroll", function() {
+          if (contentDiv.scrollHeight > maxHeight) {
+              contentDiv.style.overflowY = "scroll";
+          } else {
+              contentDiv.style.overflowY = "auto";
+          }
+      });
+
     }, 1000);
 
     let removeCartItemButtons = document.getElementsByClassName('btn-danger')
@@ -336,12 +357,13 @@ document.addEventListener("DOMContentLoaded", function() {
       input.addEventListener('change', quantityChanged)
     }
 
+    document.getElementById('remove-all').addEventListener('click', removeAllCartItems)
+
     function displayCart() {
       let cartItems = document.getElementsByClassName('cart-items')[0]
-      let totalQuantity = 0;
+      console.log(cart);
       if(cart.length > 0){
           cart.forEach(item => {
-              totalQuantity = totalQuantity + item.quantity;
 
               let cartRow = document.createElement('div');
               cartRow.classList.add('cart-row');
@@ -365,7 +387,7 @@ document.addEventListener("DOMContentLoaded", function() {
         cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
           });
       }
-      iconCartSpan.innerText = totalQuantity;
+      updateCartQuantity();
       updateCartTotal();
   }
 
@@ -381,6 +403,12 @@ document.addEventListener("DOMContentLoaded", function() {
     updateCartTotal();
   }
 
+  function removeAllCartItems(event) {
+    cart = [];
+    addCartToMemory();
+    window.location.href = "purchaseformBS.html";
+  }
+
   function quantityChanged(event) {
     let input = event.target
     let product_id = input.parentElement.parentElement.dataset.id;
@@ -394,10 +422,13 @@ document.addEventListener("DOMContentLoaded", function() {
     updateCartTotal();
   }
 
+
+  
     
       document.getElementById("form").addEventListener("submit", function (event) {
         event.preventDefault();
         tryPurchase()
+      });
 
         function tryPurchase() {
 
@@ -459,7 +490,7 @@ document.addEventListener("DOMContentLoaded", function() {
           window.location.href = "confirmation.html";
         }
       }
-    });
+    
       
   }
 
@@ -528,6 +559,5 @@ document.addEventListener("DOMContentLoaded", function() {
         cartItems.append(cartRow);
           })
       }
-      iconCartNumber.innerText = 0;
       localStorage.clear();
   }
