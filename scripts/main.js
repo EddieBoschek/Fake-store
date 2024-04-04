@@ -102,6 +102,28 @@ function updateCartQuantity() {
   iconCartNumber.innerText = totalQuantity;
 }
 
+iconCart.addEventListener('click', () => {
+  window.location.href = "purchaseformBS.html";
+})
+
+const collapseNavs = () => {
+  const links = document.getElementById("navbar-collapse");
+  if (links) {
+    const collapseLinks = new bootstrap.Collapse(links, {
+      toggle: false,
+    });
+    collapseLinks.hide();
+  }
+
+  const categories = document.getElementById("navbar-secondary");
+  if (categories) {
+    const collapseCategories = new bootstrap.Collapse(categories, {
+      toggle: false,
+    });
+    collapseCategories.hide();
+  }
+};
+
 document.addEventListener("DOMContentLoaded", function() {
   if (document.body.classList.contains('standard')) {
 
@@ -234,7 +256,6 @@ document.addEventListener("DOMContentLoaded", function() {
       return starSvg;
     };
     
-      console.log("Standard")
       const ui = new UI();
       const categories = new Map([
         ["Women's Clothing", "women"],
@@ -271,24 +292,6 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
 
-    const collapseNavs = () => {
-      const links = document.getElementById("navbar-collapse");
-      if (links) {
-        const collapseLinks = new bootstrap.Collapse(links, {
-          toggle: false,
-        });
-        collapseLinks.hide();
-      }
-
-      const categories = document.getElementById("navbar-secondary");
-      if (categories) {
-        const collapseCategories = new bootstrap.Collapse(categories, {
-          toggle: false,
-        });
-        collapseCategories.hide();
-      }
-    };
-
     document
         .getElementById("purchase-button")
         .addEventListener("click", function (event) {
@@ -314,36 +317,13 @@ document.addEventListener("DOMContentLoaded", function() {
         addCartToMemory();
         updateCartQuantity()
     }
-
-    iconCart.addEventListener('click', () => {
-      console.log("Cart clicked");
-      window.location.href = "purchaseformBS.html";
-    })
   }
 
   if (document.body.classList.contains('cart-and-form')) {
     console.log("Cart and form");
     setTimeout(() => {
       displayCart();
-
-      let contentDiv = document.getElementsByClassName("cart-items")[0];
-      let maxHeight = 200;
-
-      if (contentDiv.scrollHeight > maxHeight) {
-          contentDiv.style.overflowY = "scroll";
-      } else {
-          contentDiv.style.overflowY = "auto";
-      }
-
-      contentDiv.addEventListener("scroll", function() {
-          if (contentDiv.scrollHeight > maxHeight) {
-              contentDiv.style.overflowY = "scroll";
-          } else {
-              contentDiv.style.overflowY = "auto";
-          }
-      });
-
-    }, 1000);
+    }, 400);
 
     let removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -376,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <img class="cart-item-image" src="${product.image}" width="100" height="100">
             <span class="cart-item-title">${product.title}</span>
         </div>
-        <span class="cart-price cart-column">${product.price * item.quantity}</span>
+        <span class="cart-price cart-column">$${product.price * item.quantity}</span>
         <div class="cart-quantity cart-column">
             <input class="cart-quantity-input" type="number" value="${item.quantity}">
             <button class="btn btn-danger" type="button">REMOVE</button>
@@ -416,18 +396,17 @@ document.addEventListener("DOMContentLoaded", function() {
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
     }
-    cart[positionItemInCart].quantity = input.value;
+    cart[positionItemInCart].quantity = parseInt(input.value);
     addCartToMemory();
     updateCartQuantity();
     updateCartTotal();
   }
 
-
-  
-    
       document.getElementById("form").addEventListener("submit", function (event) {
         event.preventDefault();
-        tryPurchase()
+        if (cart.length > 0) {
+          tryPurchase();
+        }
       });
 
         function tryPurchase() {
@@ -521,7 +500,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (document.body.classList.contains('confirmation')) {
     setTimeout(() => {
       displayPurchase();
-    }, 1000);
+    }, 400);
     document.getElementById("firstNameCon").textContent =
     localStorage.getItem("first-name");
     document.getElementById("lastNameCon").textContent =
@@ -538,7 +517,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayPurchase() {
       let cartItems = document.getElementsByClassName('cart-items')[0]
-      let totalQuantity = 0;
       if(cart.length > 0){
           cart.forEach(item => {
               let cartRow = document.createElement('div');
@@ -551,13 +529,15 @@ document.addEventListener("DOMContentLoaded", function() {
             <img class="cart-item-image" src="${product.image}" width="100" height="100">
             <span class="cart-item-title">${product.title}</span>
         </div>
-        <span class="cart-price cart-column">${product.price * item.quantity}</span>
+        <span class="cart-price cart-column">$${product.price * item.quantity}</span>
         <div class="cart-quantity cart-column">
+            <input class="cart-quantity-input hidden-input" type="number" value="${item.quantity}">
             <p>Quantity: ${item.quantity}<p/>
         </div>`
         cartRow.innerHTML = cartRowContents
         cartItems.append(cartRow);
           })
       }
+      updateCartTotal();
       localStorage.clear();
   }
