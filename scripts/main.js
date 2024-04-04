@@ -341,10 +341,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayCart() {
       let cartItems = document.getElementsByClassName('cart-items')[0]
+      if (cart.length == 0) {
+        let cartEmpty = `<p>Cart is empty</p>
+        <button id="back-to-products" class="btn btn-success" type="button">Back to Products</button>`
+        let cartRow = document.createElement('div');
+        cartRow.innerHTML = cartEmpty;
+        cartRow.classList.add('m-5');
+        cartItems.append(cartRow);
+
+        document.getElementById('back-to-products').addEventListener('click', backToProducts)
+      }
       console.log(cart);
       if(cart.length > 0){
           cart.forEach(item => {
-
               let cartRow = document.createElement('div');
               cartRow.classList.add('cart-row');
               cartRow.dataset.id = item.product_id;
@@ -361,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <input class="cart-quantity-input" type="number" value="${item.quantity}">
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`
-        cartRow.innerHTML = cartRowContents
+        cartRow.innerHTML = cartRowContents;
         cartItems.append(cartRow);
         cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
         cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
@@ -381,6 +390,9 @@ document.addEventListener("DOMContentLoaded", function() {
     addCartToMemory();
     updateCartQuantity();
     updateCartTotal();
+    if (cart.length == 0) {
+      window.location.href = "purchaseformBS.html";
+    }
   }
 
   function removeAllCartItems(event) {
@@ -400,6 +412,10 @@ document.addEventListener("DOMContentLoaded", function() {
     addCartToMemory();
     updateCartQuantity();
     updateCartTotal();
+  }
+
+  function backToProducts() {
+    window.location.href = "index.html";
   }
 
       document.getElementById("form").addEventListener("submit", function (event) {
