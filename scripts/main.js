@@ -50,8 +50,6 @@ const products = new Products();
 let category = "product";
 let allProducts = [];
 
-let dataLoaded = false;
-
 let iconCart = document.getElementById('cart-button')
 let iconCartNumber = document.getElementById('cart-quantity');
 
@@ -87,7 +85,6 @@ function updateCartTotal() {
     total = total + (price * quantity)
   }
   total = Math.round(total * 100) / 100
-  console.log(total);
   document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total
 }
 
@@ -98,7 +95,6 @@ function updateCartQuantity() {
       totalQuantity = totalQuantity + item.quantity;
     });
   }
-  console.log("Updates Quantity: " + totalQuantity)
   iconCartNumber.innerText = totalQuantity;
 }
 
@@ -351,7 +347,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         document.getElementById('back-to-products').addEventListener('click', backToProducts)
       }
-      console.log(cart);
       if(cart.length > 0){
           cart.forEach(item => {
               let cartRow = document.createElement('div');
@@ -359,7 +354,6 @@ document.addEventListener("DOMContentLoaded", function() {
               cartRow.dataset.id = item.product_id;
               let positionProduct = allProducts.findIndex((value) => value.id == item.product_id);
               let product = allProducts[positionProduct];
-              console.log(product);
               let cartRowContents = `
         <div class="cart-item cart-column">
             <img class="cart-item-image" src="${product.image}" width="100" height="100">
@@ -395,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  function removeAllCartItems(event) {
+  function removeAllCartItems() {
     cart = [];
     addCartToMemory();
     window.location.href = "purchaseformBS.html";
@@ -537,7 +531,6 @@ document.addEventListener("DOMContentLoaded", function() {
           cart.forEach(item => {
               let cartRow = document.createElement('div');
               cartRow.classList.add('cart-row');
-              cartRow.dataset.id = item.product_id;
               let positionProduct = allProducts.findIndex((value) => value.id == item.product_id);
               let product = allProducts[positionProduct];
               var cartRowContents = `
