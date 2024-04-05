@@ -50,6 +50,16 @@ const products = new Products();
 let category = "product";
 let allProducts = [];
 
+products.getProducts(category).then(products => {
+          
+  products.forEach(product => {
+    allProducts.push(product);
+  });
+
+}).catch(error => {
+  console.error("Products did not load.", error);
+});
+
 let iconCart = document.getElementById('cart-button')
 let iconCartNumber = document.getElementById('cart-quantity');
 
@@ -61,16 +71,6 @@ let cart = [];
     if(localStorage.getItem("cart")){
       cart = JSON.parse(localStorage.getItem('cart'));
     }
-
-products.getProducts(category).then(products => {
-          
-  products.forEach(product => {
-    allProducts.push(product);
-  });
-
-}).catch(error => {
-  console.error("Products did not load.", error);
-});
 
 function updateCartTotal() {
   let cartItemContainer = document.getElementsByClassName('cart-items')[0]
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document
-        .getElementById("purchase-button")
+        .getElementById("add-to-cart")
         .addEventListener("click", function (event) {
           const product_Id = localStorage.getItem("selectedProductId");
           addToCart(product_Id);
@@ -344,7 +344,6 @@ document.addEventListener("DOMContentLoaded", function() {
         cartRow.innerHTML = cartEmpty;
         cartRow.classList.add('m-5');
         cartItems.append(cartRow);
-
         document.getElementById('back-to-products').addEventListener('click', backToProducts)
       }
       if(cart.length > 0){
